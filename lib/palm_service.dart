@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 class PalmService {
   PalmService._(this.apiKey);
+
   final String apiKey;
 
   static PalmService? _instance;
@@ -29,7 +30,8 @@ class PalmService {
   Future<String?> generateMessage(String prompt) async {
     final result = await http.post(
         Uri.parse(
-            "https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${apiKey}"),
+          "https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${apiKey}",
+        ),
         body: jsonEncode({
           "prompt": {"text": prompt},
         }),
