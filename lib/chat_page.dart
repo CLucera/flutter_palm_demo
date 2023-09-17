@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_palm_api/palm_service.dart';
 
 import 'chat_message.dart';
 
@@ -11,9 +12,11 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   late final _controller = TextEditingController()
-    ..addListener(() => setState(() {}));
+    ..addListener(
+      () => setState(() {}),
+    );
 
-  List<ChatMessage> _messages = <ChatMessage>[];
+  final _messages = <ChatMessage>[];
   bool _submitting = false;
 
   @override
@@ -77,12 +80,12 @@ class _ChatPageState extends State<ChatPage> {
 
     _controller.clear();
 
-    await Future.delayed(const Duration(seconds: 1));
+    final response = await PalmService.instance.generateMessage(message);
     setState(() {
       _messages.insert(
         0,
-        const ChatMessage(
-          message: "Your response to message is whatever",
+        ChatMessage(
+          message: response ?? "An error occurred, please try again",
           fromUser: false,
         ),
       );

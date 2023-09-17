@@ -5,7 +5,7 @@ import 'package:flutter_palm_api/palm_service.dart';
 
 void main() {
   //TODO USE YOUR API KEY
-  PalmService.init(API_KEY);
+  PalmService.init(kApiKey);
   runApp(const FlutterPalmApp());
 }
 
